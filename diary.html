@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>My Diary</title>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Nunito', sans-serif;
+      background: #fceff9;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .container {
+      background: #fff;
+      padding: 30px 40px;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+      max-width: 600px;
+      width: 100%;
+      text-align: center;
+    }
+
+    h2 {
+      margin-bottom: 20px;
+      color: #e84393;
+    }
+
+    textarea {
+      width: 100%;
+      height: 200px;
+      padding: 15px;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      resize: none;
+    }
+
+    button {
+      padding: 12px 20px;
+      margin-top: 15px;
+      margin-right: 10px;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+      color: #fff;
+    }
+
+    .save-btn {
+      background-color: #6c5ce7;
+    }
+
+    .back-btn {
+      background-color: #636e72;
+    }
+
+    .status {
+      margin-top: 10px;
+      color: green;
+      font-size: 14px;
+    }
+
+    .logout-btn {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background-color: #d63031;
+  color: white;
+  padding: 10px 16px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: bold;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  transition: background 0.3s;
+}
+
+.logout-btn:hover {
+  background-color: #e74c3c;
+}
+
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h2>📝 Write Your Feelings</h2>
+    <textarea id="diaryEntry" placeholder="Dear diary..."></textarea><br>
+    <button class="save-btn" onclick="saveDiary()">Save Entry</button>
+    <a href="homepage.html">
+      <button class="back-btn">⬅️ Back</button>
+    </a>
+    <div class="status" id="statusMsg"></div>
+  </div>
+
+  <script>
+    function saveDiary() {
+      const text = document.getElementById("diaryEntry").value;
+  
+      fetch("submit_diary.php", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded"
+        },
+        body: "entry=" + encodeURIComponent(text) + "&user_id=" + encodeURIComponent(1) // replace 1 with actual user ID if needed
+      })
+      .then(response => response.text())
+      .then(data => {
+        if (data.trim() === "success") {
+          document.getElementById("statusMsg").textContent = "✅ Entry saved successfully!";
+        } else {
+          document.getElementById("statusMsg").textContent = "❌ Error saving entry.";
+        }
+      });
+    }
+    
+  </script>
+  <a href="logout.php" class="logout-btn">🔓 Logout</a>
+
+
+</body>
+</html>

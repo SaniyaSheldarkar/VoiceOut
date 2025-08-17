@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Talk to Chatbot</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f0f8ff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px;
+    }
+
+    h1 {
+      color: #0077aa;
+    }
+
+    #chatbox {
+      width: 100%;
+      max-width: 500px;
+      height: 400px;
+      border: 2px solid #0077aa;
+      border-radius: 8px;
+      padding: 10px;
+      overflow-y: auto;
+      background-color: white;
+      margin-bottom: 10px;
+    }
+
+    .message {
+      margin: 5px 0;
+    }
+
+    .user {
+      text-align: right;
+      color: #444;
+    }
+
+    .bot {
+      text-align: left;
+      color: #0077aa;
+    }
+
+    #inputArea {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    input[type="text"] {
+      padding: 10px;
+      width: 300px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+
+    button {
+      padding: 10px 20px;
+      background-color: #0077aa;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #005f87;
+    }
+    .logout-btn {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background-color: #d63031;
+  color: white;
+  padding: 10px 16px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: bold;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  transition: background 0.3s;
+}
+
+.logout-btn:hover {
+  background-color: #e74c3c;
+}
+
+  </style>
+</head>
+<body>
+  <h1>🤖 Talk to Chatbot</h1>
+  <div id="chatbox"></div>
+  <div id="inputArea">
+    <input type="text" id="userInput" placeholder="Type your message...">
+    <button onclick="sendMessage()">Send</button>
+  </div>
+  <br>
+  <button onclick="goBack()">⬅ Back</button>
+
+  <script>
+    function sendMessage() {
+      const input = document.getElementById("userInput");
+      const message = input.value.trim();
+      if (!message) return;
+
+      addMessage("You: " + message, "user");
+      const reply = getBotReply(message);
+      addMessage("Bot: " + reply, "bot");
+
+      input.value = "";
+    }
+
+    function addMessage(text, className) {
+      const chatbox = document.getElementById("chatbox");
+      const msgDiv = document.createElement("div");
+      msgDiv.className = "message " + className;
+      msgDiv.textContent = text;
+      chatbox.appendChild(msgDiv);
+      chatbox.scrollTop = chatbox.scrollHeight;
+    }
+
+    function getBotReply(msg) {
+      msg = msg.toLowerCase();
+
+      if (["hi", "hello", "hey"].some(word => msg.includes(word))) {
+        return "Hiii! What can I help you?";
+      } else if (msg.includes("help")) {
+        sendFeelingToServer("help");
+        return "You're not alone. I'm here for you. Try taking slow breaths. Want to talk more?";
+      } else if (msg.includes("anxiety")) {
+        sendFeelingToServer("anxiety");
+        return "Anxiety is tough, but manageable. Try grounding yourself—name 5 things you can see, 4 you can touch... you can visit our relax_room";
+      } else if (msg.includes("sad") || msg.includes("feeling low")) {
+        sendFeelingToServer("sad");
+        return "It's okay to feel this way. You're strong for reaching out.";
+      } else if (msg.includes("suicidal")) {
+        sendFeelingToServer("suicidal");
+        return "Please talk to someone. You're not alone. You matter. 💛";
+      } else if (msg.includes("should i do")) {
+        sendFeelingToServer("help");
+        return "How are you feeling right now? Maybe just grab popcorn and watch your fav show. Sometimes, doing nothing is also healing💛 just be relax";
+      } else if (msg.includes("happy")) {
+        sendFeelingToServer("happy");
+        return "That's great buddy... keep smiling, because it suits you.";
+     }else if (msg.includes("thank you")) {
+            return "your welcome, byee";
+        
+      } else {
+        return "I'm here to listen. You can say things like 'I need help', or 'I'm feeling low'.";
+      }
+    }
+
+    function sendFeelingToServer(feeling) {
+      fetch("php/log_feeling.php", {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: "feeling=" + encodeURIComponent(feeling)
+      });
+    }
+
+    function goBack() {
+      window.location.href = "homepage.html";
+    }
+  </script>
+  <a href="logout.php" class="logout-btn">🔓 Logout</a>
+
+</body>
+</html>

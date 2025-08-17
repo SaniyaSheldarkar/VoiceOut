@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>SOS Page</title>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Nunito', sans-serif;
+      background-color: #fceae8;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .sos-container {
+      background: #fff;
+      padding: 30px 40px;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+      text-align: center;
+    }
+
+    h1 {
+      color: #e84118;
+      margin-bottom: 20px;
+    }
+
+    p {
+      font-size: 18px;
+      margin-bottom: 25px;
+      color: #333;
+    }
+
+    button {
+      padding: 12px 20px;
+      font-size: 16px;
+      border: none;
+      border-radius: 8px;
+      margin: 10px;
+      cursor: pointer;
+      color: white;
+    }
+
+    .call-btn {
+      background-color: #44bd32;
+    }
+
+    .sms-btn {
+      background-color: #273c75;
+    }
+
+    .back-btn {
+      background-color: #718093;
+      margin-top: 20px;
+    }
+
+    button:hover {
+      opacity: 0.9;
+    }
+
+    a {
+      text-decoration: none;
+    }
+
+    .logout-btn {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background-color: #d63031;
+  color: white;
+  padding: 10px 16px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: bold;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  transition: background 0.3s;
+}
+
+.logout-btn:hover {
+  background-color: #e74c3c;
+}
+
+  </style>
+</head>
+<body>
+
+  <div class="sos-container">
+    <h1>🚨 Emergency SOS</h1>
+    <p>Emergency Contact: <strong id="emergencyDisplay">Loading...</strong></p>
+
+    <a id="callLink" href="#">
+      <button class="call-btn">📞 Call Emergency Contact</button>
+    </a>
+
+    <a id="smsLink" href="#">
+      <button class="sms-btn">📩 Send Emergency SMS</button>
+    </a>
+
+    <a href="homepage.html">
+      <button class="back-btn">⬅️ Back to Home</button>
+    </a>
+
+    <a href="logout.php" class="logout-btn">🔓 Logout</a>
+
+  </div>
+
+  <script>
+    // Fetch the emergency number from the backend
+    fetch('get_emergency.php')
+      .then(response => response.json())
+      .then(data => {
+        const emergencyNumber = data.number;
+
+        if (emergencyNumber) {
+          document.getElementById("emergencyDisplay").textContent = emergencyNumber;
+          document.getElementById("callLink").href = `tel:${emergencyNumber}`;
+          document.getElementById("smsLink").href = `sms:${emergencyNumber}?body=I need help! Please contact me immediately.`;
+
+          // Log SOS call
+          document.getElementById("callLink").addEventListener("click", () => {
+            fetch(`sos.php?number=${emergencyNumber}&method=call`);
+          });
+
+          // Log SOS SMS
+          document.getElementById("smsLink").addEventListener("click", () => {
+            fetch(`sos.php?number=${emergencyNumber}&method=sms`);
+          });
+        } else {
+          document.getElementById("emergencyDisplay").textContent = "Not available. Please fill user details first.";
+        }
+      })
+      .catch(error => {
+        console.error("Error fetching emergency number:", error);
+        document.getElementById("emergencyDisplay").textContent = "Error loading number.";
+      });
+  </script>
+
+</body>
+</html>

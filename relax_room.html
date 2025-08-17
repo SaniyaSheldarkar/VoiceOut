@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Relax Room</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background: #e0f7fa;
+      margin: 0;
+      padding: 0;
+      text-align: center;
+    }
+
+    h1 {
+      padding: 20px;
+      color: #006064;
+    }
+
+    .section {
+      margin: 20px auto;
+      padding: 20px;
+      background: #ffffff;
+      border-radius: 12px;
+      width: 80%;
+      max-width: 800px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+
+    button {
+      padding: 10px 20px;
+      margin: 10px;
+      background-color: #0097a7;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #007c91;
+    }
+
+    #breathing-text {
+      font-size: 24px;
+      font-weight: bold;
+      color: #004d40;
+      margin-top: 15px;
+    }
+
+    #affirmation-text {
+      font-size: 20px;
+      color: #004d40;
+      margin-top: 15px;
+    }
+
+    canvas {
+      border: 2px solid #0097a7;
+      margin-top: 10px;
+      cursor: crosshair;
+    }
+
+    iframe {
+      border-radius: 10px;
+    }
+    .logout-btn {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background-color: #d63031;
+  color: white;
+  padding: 10px 16px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: bold;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  transition: background 0.3s;
+}
+
+.logout-btn:hover {
+  background-color: #e74c3c;
+}
+
+  </style>
+</head>
+<body>
+
+  <h1>🌼 Welcome to Your Relax Room 🌼</h1>
+
+  <!-- Soothing Background Music with Toggle -->
+  <audio id="backgroundMusic" autoplay loop>
+    <source src="https://www.bensound.com/bensound-music/bensound-slowmotion.mp3" type="audio/mp3">
+    Your browser does not support the audio element.
+  </audio>
+  <button onclick="toggleMusic()">🎵 Toggle Music</button>
+
+  <!-- Guided Meditation Videos -->
+  <div class="section">
+    <h2>🧘 Guided Meditation</h2>
+    <iframe width="90%" height="315" src="https://www.youtube.com/embed/inpok4MKVLM" 
+            frameborder="0" allowfullscreen></iframe>
+  </div>
+
+  <!-- Breathing Exercise -->
+  <div class="section">
+    <h2>🌬️ Breathing Exercise</h2>
+    <div id="breathing-text">Click to Start</div>
+    <button onclick="startBreathing()">Start Breathing</button>
+  </div>
+
+  <!-- Affirmations -->
+  <div class="section">
+    <h2>💖 Positive Affirmations</h2>
+    <div id="affirmation-text">Click below to feel better</div>
+    <button onclick="showAffirmation()">Show Affirmation</button>
+  </div>
+
+  <!-- Doodle Area -->
+  <div class="section">
+    <h2>🎨 Doodle Pad</h2>
+    <canvas id="doodle" width="500" height="300"></canvas><br><br>
+    <button onclick="setColor('black')">Black</button>
+    <button onclick="setColor('blue')">Blue</button>
+    <button onclick="setColor('red')">Red</button>
+    <button onclick="setColor('green')">Green</button>
+    <button onclick="setColor('white')">Eraser</button>
+    <button onclick="clearCanvas()">Clear Drawing</button>
+  </div>
+
+  <!-- Back Button -->
+  <div class="section">
+    <button onclick="window.location.href='homepage.html'">⬅ Back</button>
+  </div>
+
+  <script>
+    // Background music toggle
+    let isMusicPlaying = true;
+    const backgroundMusic = document.getElementById("backgroundMusic");
+
+    function toggleMusic() {
+      if (isMusicPlaying) {
+        backgroundMusic.pause();
+      } else {
+        backgroundMusic.play();
+      }
+      isMusicPlaying = !isMusicPlaying;
+    }
+
+    // Breathing Exercise
+    const breathingText = document.getElementById("breathing-text");
+    let breathingPhrases = ["Breathe In", "Hold", "Breathe Out"];
+    let breathIndex = 0;
+    let breathingInterval;
+
+    function startBreathing() {
+      clearInterval(breathingInterval);
+      breathIndex = 0;
+      breathingText.innerText = breathingPhrases[breathIndex];
+      breathingInterval = setInterval(() => {
+        breathIndex = (breathIndex + 1) % breathingPhrases.length;
+        breathingText.innerText = breathingPhrases[breathIndex];
+      }, 3000);
+    }
+
+    // Positive Affirmations
+    const affirmations = [
+      "You are doing your best.",
+      "You are strong, calm, and capable.",
+      "You deserve peace.",
+      "You are safe and supported.",
+      "Take a deep breath. It's okay to pause."
+    ];
+
+    function showAffirmation() {
+      const random = affirmations[Math.floor(Math.random() * affirmations.length)];
+      document.getElementById("affirmation-text").innerText = random;
+    }
+
+    // Doodle Pad
+    const canvas = document.getElementById("doodle");
+    const ctx = canvas.getContext("2d");
+    let drawing = false;
+    let currentColor = "black";
+
+    canvas.addEventListener("mousedown", () => {
+      drawing = true;
+      ctx.beginPath();
+    });
+
+    canvas.addEventListener("mouseup", () => drawing = false);
+    canvas.addEventListener("mouseleave", () => drawing = false);
+
+    canvas.addEventListener("mousemove", (e) => {
+      if (!drawing) return;
+      ctx.lineWidth = 3;
+      ctx.lineCap = "round";
+      ctx.strokeStyle = currentColor;
+      ctx.lineTo(e.offsetX, e.offsetY);
+      ctx.stroke();
+      ctx.beginPath();
+      ctx.moveTo(e.offsetX, e.offsetY);
+    });
+
+    function setColor(color) {
+      currentColor = color;
+    }
+
+    function clearCanvas() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+    }
+  </script>
+<a href="logout.php" class="logout-btn">🔓 Logout</a>
+
+</body>
+</html>

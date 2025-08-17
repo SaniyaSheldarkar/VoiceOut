@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>User Details Form</title>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Nunito', sans-serif;
+      background: #f1f2f6;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .container {
+      background: #fff;
+      padding: 30px 40px;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+      max-width: 500px;
+      width: 100%;
+    }
+
+    h2 {
+      text-align: center;
+      color: #2f3542;
+      margin-bottom: 25px;
+    }
+
+    .form-group {
+      margin-bottom: 15px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 6px;
+      color: #333;
+    }
+
+    input, select {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      background-color: #4a69bd;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      margin-top: 15px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #3b5b9e;
+    }
+
+    .status {
+      text-align: center;
+      margin-top: 10px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h2>Tell us more about yourself</h2>
+    <form id="userForm">
+      <div class="form-group">
+        <label>Full Name</label>
+        <input type="text" name="fullname" required>
+      </div>
+
+      <div class="form-group">
+        <label>Age</label>
+        <input type="number" name="age" required>
+      </div>
+
+      <div class="form-group">
+        <label>Area / Address</label>
+        <input type="text" name="address" required>
+      </div>
+
+      <div class="form-group">
+        <label>Phone Number</label>
+        <input type="tel" name="phone" required>
+      </div>
+
+      <div class="form-group">
+        <label>Emergency Contact Number</label>
+        <input type="tel" name="emergency" required>
+      </div>
+
+      <div class="form-group">
+        <label>Education</label>
+        <input type="text" name="education" required>
+      </div>
+
+      <div class="form-group">
+        <label>Profession</label>
+        <select name="profession" required>
+          <option value="">--Select--</option>
+          <option value="student">Student</option>
+          <option value="employee">Employee</option>
+          <option value="housewife">Housewife</option>
+          <option value="other">Other</option>
+        </select>
+      </div>
+
+      <button type="submit">Continue</button>
+    </form>
+    <div class="status" id="statusMsg"></div>
+  </div>
+
+  <script>
+    document.getElementById("userForm").addEventListener("submit", function(event) {
+      event.preventDefault();
+
+      const formData = new FormData(this);
+
+      fetch("submit_user_details.php", {
+        method: "POST",
+        body: formData
+      })
+      .then(response => response.text())
+      .then(data => {
+        const msg = document.getElementById("statusMsg");
+        if (data.trim() === "success") {
+          msg.style.color = "green";
+          msg.textContent = "✅ Details saved successfully!";
+          setTimeout(() => {
+            window.location.href = "homepage.html";
+          }, 1000);
+        } else {
+          msg.style.color = "red";
+          msg.textContent = "❌ Failed to save: " + data;
+        }
+      });
+    });
+  </script>
+
+</body>
+</html>

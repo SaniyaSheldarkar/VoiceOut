@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Register Complaint - Support Hub</title>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Nunito', sans-serif;
+      background: url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1500&q=80');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 40px 20px;
+      color: #2d3436;
+    }
+
+    h2 {
+      margin-bottom: 10px;
+      color: #2d3436;
+    }
+
+    form {
+      background: rgba(255, 255, 255, 0.92);
+      padding: 30px;
+      border-radius: 12px;
+      max-width: 700px;
+      width: 100%;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    label {
+      display: block;
+      margin: 15px 0 5px;
+      font-weight: bold;
+    }
+
+    input, textarea, select {
+      width: 100%;
+      padding: 12px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      font-size: 16px;
+      font-family: inherit;
+    }
+
+    textarea {
+      height: 120px;
+      resize: vertical;
+    }
+
+    button {
+      margin-top: 25px;
+      background-color: #6c5ce7;
+      color: white;
+      border: none;
+      padding: 15px 25px;
+      font-size: 16px;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    button:hover {
+      background-color: #4e9ae6;
+    }
+
+    input[type="file"] {
+      padding: 6px;
+    }
+    .logout-btn {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background-color: #d63031;
+  color: white;
+  padding: 10px 16px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: bold;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  transition: background 0.3s;
+}
+
+.logout-btn:hover {
+  background-color: #e74c3c;
+}
+
+  </style>
+</head>
+<body>
+
+  <h2>📢 Register a Complaint</h2>
+  <p>You’re not alone. Fill out what you can—we’re here to help.</p>
+
+  <form action="submit_complaint.php" method="POST" enctype="multipart/form-data">
+    
+    <label for="name">Your Name (optional)</label>
+    <input type="text" id="name" name="name" placeholder="You can stay anonymous">
+
+    <label for="email">Email (optional)</label>
+    <input type="email" id="email" name="email" placeholder="Only if you'd like us to reach out">
+
+    <label for="category">Type of Incident</label>
+    <select id="category" name="category" required>
+      <option value="" disabled selected>Select a category</option>
+      <option value="bullying">Bullying</option>
+      <option value="harassment">Harassment</option>
+      <option value="verbal_abuse">Verbal Abuse</option>
+      <option value="cyberbullying">Cyberbullying</option>
+      <option value="discrimination">Discrimination</option>
+      <option value="other">Other</option>
+    </select>
+
+    <label for="details">Describe the Incident</label>
+    <textarea id="details" name="details" placeholder="Tell us what happened..." required></textarea>
+
+    <label for="location">Where did it happen?</label>
+    <input type="text" id="location" name="location" placeholder="e.g., classroom, social media, hallway">
+
+    <label for="date">Date of Incident</label>
+    <input type="date" id="date" name="date" required>
+
+    <label for="offender">Person Involved (optional)</label>
+    <input type="text" id="offender" name="offender" placeholder="Name, username or description">
+
+    <label for="witnesses">Any Witnesses? (optional)</label>
+    <input type="text" id="witnesses" name="witnesses" placeholder="Names or descriptions">
+
+    <label for="evidence">Upload Evidence (optional)</label>
+    <input type="file" id="evidence" name="evidence" accept="image/*,application/pdf">
+
+    <button type="submit">Submit Complaint</button>
+    
+  </form>
+  <a href="logout.php" class="logout-btn">🔓 Logout</a>
+
+
+</body>
+</html>

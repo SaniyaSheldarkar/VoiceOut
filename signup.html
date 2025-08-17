@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>VoiceOut – Complaint & Support System - Sign Up</title>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: 'Nunito', sans-serif;
+      display: flex;
+      height: 100vh;
+    }
+
+    .left-side {
+      flex: 1;
+      background-image: url('images/signupbg.jpg');
+      background-size: cover;
+      background-position: center;
+      position: relative;
+    }
+
+    .overlay {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      padding: 40px;
+      text-align: center;
+    }
+
+    .overlay h1 {
+      font-size: 36px;
+      margin-bottom: 20px;
+    }
+
+    .right-side {
+      flex: 1;
+      background-color: #ffffff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 50px;
+    }
+
+    .signup-form {
+      width: 100%;
+      max-width: 400px;
+    }
+
+    .signup-form h2 {
+      color: #4a69bd;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .form-group {
+      margin-bottom: 15px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 6px;
+      color: #333;
+    }
+
+    input {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      background-color: #4a69bd;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      margin-top: 10px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #3b5b9e;
+    }
+
+    .link {
+      text-align: center;
+      margin-top: 15px;
+      color: #555;
+    }
+
+    .link a {
+      color: #4a69bd;
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="left-side">
+    <div class="overlay">
+      <div>
+        <h1>You're Not Alone</h1>
+        <p>Join our support system to take the first step toward healing and strength.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="right-side">
+    <div class="signup-form">
+      <h2>VoiceOut – Complaint & Support System</h2>
+      <form onsubmit="goToDetails(event)">
+        <div class="form-group">
+          <label for="fullname">Full Name</label>
+          <input type="text" id="fullname" name="fullname" required>
+        </div>
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" required>
+        </div>
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" id="password" name="password" required>
+        </div>
+        <div class="form-group">
+          <label for="confirmPassword">Confirm Password</label>
+          <input type="password" id="confirmPassword" name="confirmPassword" required>
+        </div>
+        <button type="submit">Create Account</button>
+        <div class="link">
+          Already have an account? <a href="index.php">Login</a>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    function goToDetails(e) {
+      e.preventDefault();
+
+      // Optionally you can check if password and confirmPassword match here
+      const password = document.getElementById("password").value;
+      const confirmPassword = document.getElementById("confirmPassword").value;
+
+      if (password !== confirmPassword) {
+        alert("Passwords do not match!");
+        return;
+      }
+
+      // Redirect to user detail form page
+      window.location.href = "user_detail.html";
+    }
+  </script>
+</body>
+</html>

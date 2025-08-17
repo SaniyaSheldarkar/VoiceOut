@@ -160,3 +160,20 @@ VALUES ('System Admin', 'admin@voiceout.com', 'admin123');
 * **Admins** can log in at `/admin_login.html` and manage complaints through the dashboard.
 
 ---
+
+<img width="1909" height="375" alt="Screenshot 2025-08-17 162854" src="https://github.com/user-attachments/assets/84c8ad06-a062-445f-a39e-54032f909472" />
+<img width="1919" height="820" alt="Screenshot 2025-08-17 171652" src="https://github.com/user-attachments/assets/80677e64-0a8b-4008-b923-b03b211ad5f1" />
+<img width="1908" height="964" alt="Screenshot 2025-08-17 171632" src="https://github.com/user-attachments/assets/5742cb5f-58e9-4ff3-aed2-49686634f7f4" />
+<img width="844" height="881" alt="Screenshot 2025-08-17 171711" src="https://github.com/user-attachments/assets/d87ee41a-a3c9-49b0-a8c8-ae5576a03658" />
+
+<img width="1913" height="711" alt="Screenshot 2025-08-17 171734" src="https://github.com/user-attachments/assets/ada57be5-3298-4365-95f0-077617a76ef6" />
+<img width="1907" height="864" alt="Screenshot 2025-08-17 171854" src="https://github.com/user-attachments/assets/489f6929-c13d-47a1-a811-e9310182f73b" />
+<img width="1909" height="865" alt="Screenshot 2025-08-17 171848" src="https://github.com/user-attachments/assets/b7397416-cf6d-47dc-bb97-3f6b0ff2db84" />
+<img width="1916" height="880" alt="Screenshot 2025-08-17 171841" src="https://github.com/user-attachments/assets/3cafaf5d-bf00-4477-ab3e-1e6a2deaa53a" />
+<img width="1571" height="869" alt="Screenshot 2025-08-17 171821" src="https://github.com/user-attachments/assets/2952ebd1-2b70-4b56-b63d-7c87c5d65ae8" />
+<img width="1678" height="797" alt="Screenshot 2025-08-17 171812" src="https://github.com/user-attachments/assets/92437dad-9610-4327-9183-06727a17b292" />
+<img width="1702" height="860" alt="Screenshot 2025-08-17 171754" src="https://github.com/user-attachments/assets/37efbb84-7888-43be-acf3-18929f3fadd9" />
+<img width="1914" height="852" alt="Screenshot 2025-08-17 171747" src="https://github.com/user-attachments/assets/859328e1-a002-463b-b6ab-5e2021c05466" />
+
+
+

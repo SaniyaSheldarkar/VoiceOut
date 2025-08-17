@@ -1,4 +1,4 @@
-# VoiceOut – Complaint & Support System
+# VoiceOut — Complaint & Mental Health Support System
 
 A student-focused platform for complaint reporting, emotional support, and emergency response
 

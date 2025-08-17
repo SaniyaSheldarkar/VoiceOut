@@ -23,6 +23,18 @@ Admin Panel – Secure dashboard for administrators to view complaints, update s
 
 ---
 
+
+Tech Stack:
+
+Frontend: HTML, CSS, JavaScript
+
+Backend: PHP
+
+Database: MySQL
+
+
+
+
 ## Features
 
 * **User Module**
